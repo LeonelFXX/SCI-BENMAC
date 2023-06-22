@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&family=Roboto:wght@100;300;400;500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Paleta De Colores */
+:root {
+    --blue: #032733;
+    --red: #c01010;
+    --mustard: #d1a10a;
+    --gray: #afbdc8;
+}
+
+#bg-blue-benmac {
+    background: var(--blue);
+    color: white;
+}
+
+#bg-red-benmac {
+    background-color: var(--red);
+}
+
+#bg-mustard-benmac {
+    background-color: var(--mustard);
+}
+
+#bg-gray-benmac {
+    background-color: var(--gray);
+}
+
+/* Fix: App */
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+.navbar-toggler {
+    color: white;
+}
+
+#link-hover {
+    transition: .3s;
+}
+
+#link-hover:hover {
+    filter: brightness(90%);
+    transition: .3s;
+}
+
+.icon-benmac-primary {
+    width: 35px;
+    height: 30px;
+    background-size: cover;
+}
+
+.icon-benmac {
+    margin-bottom: 3px;
+    width: 20px;
+    height: 20px;
+    filter: invert(1);
+}
+
+.icon-benmac-dark {
+    margin-bottom: 3px;
+    width: 20px;
+    height: 20px;
+}
+
+.icon-benmac-gray {
+    margin-bottom: 3px;
+    width: 20px;
+    height: 20px;
+    filter: grayscale(1);
+}
