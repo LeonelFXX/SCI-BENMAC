@@ -35,6 +35,19 @@ return [
 
     'connections' => [
 
+        'mysql_external' => [
+            'driver' => 'mysql',
+            'host' => env('DB_EXTERNAL_HOST'),
+            'port' => env('DB_EXTERNAL_PORT'),
+            'database' => env('DB_EXTERNAL_DATABASE'),
+            'username' => env('DB_EXTERNAL_USERNAME'),
+            'password' => env('DB_EXTERNAL_PASSWORD'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+        ],
+
         'sqlite' => [
             'driver' => 'sqlite',
             'url' => env('DATABASE_URL'),

@@ -14,7 +14,7 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    {{-- Links --}}
+    <!-- Links -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="icon" href="{{ asset('assets/img/escudo.jpg') }}" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -61,15 +61,38 @@
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link text-white" id="link-hover"
-                                        href="{{ route('register') }}">{{ __('Regístrate') }}
+                                        href="{{ route('matricula') }}">{{ __('Regístrate') }}
                                         <img src="https://cdn-icons-png.flaticon.com/512/681/681494.png" alt="BENMAC"
                                             class="icon-benmac">
                                     </a>
                                 </li>
                             @endif
                         @else
-                            @role('Administrador')
-                                {{-- Impresiones --}}
+                            @role('Administrador_General|Administrador_Engargolados')
+                                <!-- Impresiones -->
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown-impressiones" class="nav-link text-white dropdown-toggle"
+                                        role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        v-pre>
+                                        Engargolados
+                                        <img src="https://cdn-icons-png.flaticon.com/512/3388/3388622.png" alt="BENMAC"
+                                            class="icon-benmac">
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown-impressiones">
+                                        <a class="dropdown-item" href="{{ route('solicitudes') }}">
+                                            Solicitudes Para Engargolar <span
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                {{ $solicitudes }}
+                                                <span class="visually-hidden">unread messages</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </li>
+                            @endrole
+
+                            @role('Administrador_General|Administrador_Impresiones')
+                                <!-- Impresiones -->
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown-impressiones" class="nav-link text-white dropdown-toggle"
                                         role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
@@ -80,15 +103,26 @@
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown-impressiones">
-                                        <a class="dropdown-item" href="{{ route('impressions.index') }}">
-                                            Todas Las Impresiones
-                                        </a>
+                                        @role('Administrador_General')
+                                            <a class="dropdown-item" href="{{ route('impressions.index') }}">
+                                                Todas Las Impresiones
+                                            </a>
+                                        @endrole
+                                        @role('Administrador_General|Administrador_Impresiones')
+                                            <a class="dropdown-item" href="{{ route('solicitudesImpresiones') }}">
+                                                Solicitudes Para Impresiones <span
+                                                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    {{ $solicitudes_impresiones }}
+                                                    <span class="visually-hidden">unread messages</span>
+                                                </span>
+                                            </a>
+                                        @endrole
                                     </div>
                                 </li>
                             @endrole
 
-                            @role('Administrador|Manager')
-                                {{-- Usuarios --}}
+                            @role('Administrador_General|Manager')
+                                <!-- Usuarios -->
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown-users" class="nav-link text-white dropdown-toggle" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -104,7 +138,7 @@
                                     </div>
                                 </li>
                             @endrole
-                            {{-- Sesión Usuario --}}
+                            <!-- Sesión Usuario -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link text-white dropdown-toggle" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -112,18 +146,30 @@
                                     <img src="https://cdn-icons-png.flaticon.com/512/2099/2099174.png" alt="BENMAC"
                                         class="icon-benmac">
                                 </a>
-
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('historial') }}">
-                                        Historial De Impresiones
-                                    </a>
+                                    @role('Administrador_General|Usuario|Personal_Administrativo')
+                                        <a class="dropdown-item" href="{{ route('vistaUsuarioSolicitudes') }}">
+                                            Solicitudes De Engargolados
+                                        </a>
+                                    @endrole
+                                    @role('Administrador_General|Personal_Administrativo')
+                                        <a class="dropdown-item" href="{{ route('panel') }}">
+                                            Solicitudes De Impresiones
+                                        </a>
+                                    @endrole
+                                    @role('Administrador_General|Usuario|Personal_Administrativo')
+                                        <a class="dropdown-item" href="{{ route('historial') }}">
+                                            Historial
+                                        </a>
+                                    @endrole
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar Sesión') }}
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
                                         @csrf
                                     </form>
                                 </div>
@@ -139,6 +185,8 @@
         </main>
     </div>
     @yield('scripts')
+    <script src="{{ asset('assets/js/check.js') }}"></script>
+    <script src="{{ asset('assets/js/check-2.js') }}"></script>
     <script src="{{ asset('assets/js/impresion.js') }}"></script>
 </body>
 

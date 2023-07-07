@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Printer;
 use Illuminate\Http\Request;
 use App\Models\Price;
 
@@ -30,6 +31,8 @@ class HomeController extends Controller
     {
         $price = Price::find(1);
 
-        return view('home', compact('price'));
+        $printers = Printer::all();
+        
+        return view('home', compact('price', 'printers'));
     }
 }

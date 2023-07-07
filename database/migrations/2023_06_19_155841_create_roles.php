@@ -15,16 +15,26 @@ return new class extends Migration {
      */
     public function up()
     {
-        $administrador = Role::create(['name' => 'Administrador']);
-        Role::create(['name' => 'Manager']);
-        Role::create(['name' => 'Usuario']);
+        // Roles
+        $admin_general = Role::create(['name' => 'Administrador_General']);
+        $admin_engargolados = Role::create(['name' => 'Administrador_Engargolados']);
+        $admin_impresiones = Role::create(['name' => 'Administrador_Impresiones']);
+        $manager = Role::create(['name' => 'Manager']);
+        $personal_administrativo = Role::create(['name' => 'Personal_Administrativo']);
+        $usuario = Role::create(['name' => 'Usuario']);
+        
+        // Encontrar Usuarios
+        $a_g = User::find(1);
 
-        $usuario = User::find(1);
+        // Asignar Rol A Usuario
+        $a_g->assignRole($admin_general);
 
-        $usuario->assignRole($administrador);
-
+        Permission::create(['name' => 'accederEngargolados']);
+        Permission::create(['name' => 'accederSolicitudesImpresiones']);
         Permission::create(['name' => 'accederImpresiones']);
         Permission::create(['name' => 'accederUsuarios']);
+        Permission::create(['name' => 'accederEstudiante']);
+        Permission::create(['name' => 'accederPersonalAdministrativo']);
     }
 
     /**

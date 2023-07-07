@@ -28,12 +28,35 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // Se Encuentra El Rol
-        $administrador = Role::where('name', 'Administrador')->first();
+        $admin_general = Role::where('name', 'Administrador_General')->first();
+        $admin_engargolados = Role::where('name', 'Administrador_Engargolados')->first();
+        $admin_impresiones = Role::where('name', 'Administrador_Impresiones')->first();
         $manager = Role::where('name', 'Manager')->first();
+        $personal_administrativo = Role::where('name', 'Personal_Administrativo')->first();
+        $usuario = Role::where('name', 'Usuario')->first();
 
-        // Se Asignan Los Permisos Al Rol
-        $administrador->givePermissionTo('accederImpresiones');
-        $administrador->givePermissionTo('accederUsuarios');
+        // Administrador
+        $admin_general->givePermissionTo('accederImpresiones');
+        $admin_general->givePermissionTo('accederUsuarios');
+        $admin_general->givePermissionTo('accederEngargolados');
+        $admin_general->givePermissionTo('accederSolicitudesImpresiones');
+        $admin_general->givePermissionTo('accederPersonalAdministrativo');
+        $admin_general->givePermissionTo('accederEstudiante');
+
+        // Administrador Engargolados
+        $admin_engargolados->givePermissionTo('accederEngargolados');
+
+        // Administrador Solicitudes De Impresión
+        $admin_impresiones->givePermissionTo('accederSolicitudesImpresiones');
+
+        // Manager
         $manager->givePermissionTo('accederUsuarios');
+    
+        // Personal Administrativo
+        $personal_administrativo->givePermissionTo('accederPersonalAdministrativo');
+        $personal_administrativo->givePermissionTo('accederEstudiante');
+
+        // Usuario
+        $usuario->givePermissionTo('accederEstudiante');
     }
 }

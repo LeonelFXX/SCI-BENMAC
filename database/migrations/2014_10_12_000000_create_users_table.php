@@ -15,23 +15,23 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id'); // ID (Usuario)
-            $table->string('matricula')->unique(); // Matrícula OR Clave Administrativa
-            $table->string('name'); // Nombre(s)
-            $table->string('apellido_paterno'); // Apellido Paterno
-            $table->string('apellido_materno'); // Apellido Materno
-            $table->string('licenciatura'); // Licenciatura
-            $table->string('telefono'); // Teléfono
-            $table->string('email')->unique(); // Correo Electrónico
-            $table->timestamp('email_verified_at')->nullable(); // Verificar Correo Electrónico
-            $table->string('password'); // Contraseña
-            $table->float('saldo', 8, 2)->default(0.00); // Saldo DEFAULT: $0.00
-            $table->string('tipo_usuario')->default('Estudiante'); // Tipo Usuario DEFAULT: Estudiante
+            $table->increments('id');
+            $table->string('matricula')->unique();
+            $table->string('name');
+            $table->string('apellido_paterno');
+            $table->string('apellido_materno');
+            $table->string('licenciatura');
+            $table->string('telefono');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('password');
+            $table->decimal('saldo', 10, 2)->default(0.00);
+            $table->string('tipo_usuario')->default('6');
             $table->rememberToken(); 
             $table->timestamps();
         });
 
-        
+        // Administrador General
         DB::table('users')->insert([
             'matricula' => '482100078',
             'name' => 'Edgar Leonel',
@@ -39,7 +39,7 @@ return new class extends Migration
             'apellido_materno' => 'Cuevas',
             'licenciatura' => 'Personal Administrativo',
             'telefono' => '4924920523',
-            'email' => 'edgarleonel@benmac.edu.mx',
+            'email' => 'leonelxo2020@gmail.com',
             'password' => Hash::make('Juni1200'),
             'tipo_usuario' => '1'
         ]);

@@ -19,7 +19,12 @@ class Impression extends Model
         'impresora',
         'fecha_impresion',
         'total_hojas',
-        'coste_impresion'
+        'engargolado',
+        'pago',
+        'descripcion',
+        'estado',
+        'coste_impresion',
+        'encargado'
     ];
     
     public function impresiones()

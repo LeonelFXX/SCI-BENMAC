@@ -17,7 +17,7 @@
                         </h3>
                         <div class="card mt-3 shadow-lg">
                             <div class="card-body">
-                                <!-- Matrícula o Clave Administrativa -->
+                                <!-- Matrícula || Clave Administrativa -->
                                 <div class="form-outline mb-4">
                                     <label class="form-label" for="form3Example3">Matrícula | Clave Administrativa</label>
                                     <input type="text" id="form3Example3"
@@ -30,7 +30,6 @@
                                         </span>
                                     @enderror
                                 </div>
-
                                 <!-- Contraseña -->
                                 <div class="form-outline mb-3">
                                     <label class="form-label" for="form3Example4">Contraseña</label>
@@ -43,7 +42,6 @@
                                         </span>
                                     @enderror
                                 </div>
-
                                 <div class="d-flex justify-content-between align-items-center">
                                     <!-- Recuérdame -->
                                     <div class="form-check mb-0">
@@ -62,9 +60,13 @@
                                 <div class="d-grid gap-2 text-center text-lg-start mt-3">
                                     <button type="submit" class="btn" id="bg-blue-benmac">
                                         {{ __('Entrar') }}
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2623/2623062.png" alt="BENMAC"
+                                            class="icon-benmac">
                                     </button>
-                                    <p class="mt-2 text-center">¿Aún No Tienes Cuenta? <a href="{{ route('register') }}"
-                                            class="link">Regístrate</a></p>
+                                    <p class="mt-2 text-center">
+                                        ¿Aún No Tienes Cuenta?
+                                        <a href="{{ route('matricula') }}" class="link">Regístrate</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>

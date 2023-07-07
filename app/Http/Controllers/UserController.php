@@ -69,7 +69,7 @@ class UserController extends Controller
             'tipo_usuario' => ['required', 'string', 'max:255']
         ]);
 
-        User::create([
+        $usuario = User::create([
             'matricula' => $request->matricula,
             'name' => $request->name,
             'apellido_paterno' => $request->apellido_paterno,
@@ -80,6 +80,10 @@ class UserController extends Controller
             'licenciatura' => 'Personal Administrativo',
             'tipo_usuario' => $request->tipo_usuario
         ]);
+
+        $rol = Role::find(5);
+        $usuario->assignRole($rol);
+        $usuario->save();
 
         return redirect()->route('users.index')->with('success', 'Nuevo Usuario Creado Correctamente.');
     }

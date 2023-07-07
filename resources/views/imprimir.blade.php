@@ -5,18 +5,20 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
 
-                <!-- Mensajes -->
+                <!-- Mensajes De Éxito -->
                 @if ($message = Session::get('success'))
-                    <div class="alert alert-success text-center" role="alert">
-                        <p>{{ $message }}</p>
+                    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                        <strong>Éxito En La Acción.</strong> {{ $message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
-                <!-- Mensajes Error -->
+                <!-- Mensajes De Error -->
                 @if ($errors->any())
-                    <div class="alert alert-danger text-center" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
                         @foreach ($errors->all() as $error)
-                            {{ $error }}
+                            <strong>Error En La Acción.</strong> {{ $error }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         @endforeach
                     </div>
                 @endif
@@ -39,7 +41,6 @@
                                                 value="{{ $registro->id }}" disabled />
                                         </div>
                                     </div>
-
                                     <!-- Número De Hojas -->
                                     <div class="col-md-2 mb-2">
                                         <div class="form-outline">
@@ -48,7 +49,6 @@
                                                 value="{{ $registro->numero_hojas }}" disabled />
                                         </div>
                                     </div>
-
                                     <!-- Número De Copias -->
                                     <div class="col-md-2 mb-2">
                                         <div class="form-outline">
@@ -57,7 +57,6 @@
                                                 value="{{ $registro->numero_copias }}" disabled />
                                         </div>
                                     </div>
-
                                     <!-- Total De Hojas -->
                                     <div class="col-md-2 mb-2">
                                         <div class="form-outline">
@@ -66,7 +65,6 @@
                                                 value="{{ $registro->total_hojas }}" disabled />
                                         </div>
                                     </div>
-
                                     <!-- Tamaño -->
                                     <div class="col-md-3 mb-2">
                                         <div class="form-outline">
@@ -76,23 +74,29 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row d-flex justify-content-center">
                                     <!-- Impresora -->
-                                    <div class="col-md-6 mb-2">
+                                    <div class="col-md-4 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">Impresora</label>
                                             <input type="text" class="form-control form-control-lg"
                                                 value="{{ $registro->impresora }}" disabled />
                                         </div>
                                     </div>
-
                                     <!-- Color -->
-                                    <div class="col-md-6 mb-2">
+                                    <div class="col-md-4 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">Color</label>
                                             <input type="text" class="form-control form-control-lg"
                                                 value="{{ $registro->color }}" disabled />
+                                        </div>
+                                    </div>
+                                    <!-- Engargolado -->
+                                    <div class="col-md-4 mb-2">
+                                        <div class="form-outline">
+                                            <label class="form-label">Engargolado</label>
+                                            <input type="text" class="form-control form-control-lg"
+                                                value="{{ $registro->engargolado }}" disabled>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +110,7 @@
                                 </div>
                                 <hr>
                                 <form method="POST" action="{{ route('validacionArchivo', $registro->id) }}"
-                                enctype="multipart/form-data">
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <!-- Cargar Archivo -->
                                     <div class="mb-3">
@@ -120,19 +124,24 @@
                                         <button type="submit" class="btn" id="bg-blue-benmac"
                                             onclick="imprimirArchivo()" value="Imprimir">
                                             Imprimir
+                                            <img src="https://cdn-icons-png.flaticon.com/512/446/446991.png" alt="BENMAC"
+                                                class="icon-benmac">
                                         </button>
                                     </div>
                                 </form>
                                 <form action="{{ route('rollback', $registro->id) }}" method="POST">
                                     @csrf
                                     <div class="d-grid gap-2 mt-3">
-                                        <button type="submit" class="btn btn-danger">Cancelar</button>
+                                        <button type="submit" class="btn btn-danger">
+                                            Cancelar
+                                            <img src="https://cdn-icons-png.flaticon.com/512/660/660252.png"
+                                                alt="BENMAC" class="icon-benmac">
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-
                     <div class="col-md-3 mt-2">
                         <div class="card text-center shadow-lg">
                             <div class="card-header" id="bg-blue-benmac">

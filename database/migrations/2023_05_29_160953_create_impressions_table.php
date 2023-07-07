@@ -13,17 +13,22 @@ return new class extends Migration {
     public function up()
     {
         Schema::create('impressions', function (Blueprint $table) {
-            $table->increments('id'); // ID (Impresión)
-            $table->unsignedInteger('user_id'); // ID (Usuario)
+            $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Relación "One-To-Many"
-            $table->integer('numero_hojas'); // Número Hojas Documento
-            $table->integer('numero_copias'); // Número Copias Documento (Juegos)
-            $table->string('tamaño'); // Tamaño
-            $table->string('color'); // Color
-            $table->string('impresora'); // Impresora
-            $table->date('fecha_impresion')->default(DB::raw('CURRENT_TIMESTAMP')); // Fecha DEFAULT: Current Timestamp
-            $table->integer('total_hojas'); // Total Hojas Impresas
-            $table->float('coste_impresion'); // Total Coste Impresión
+            $table->integer('numero_hojas');
+            $table->integer('numero_copias');
+            $table->string('tamaño');
+            $table->string('color');
+            $table->string('impresora');
+            $table->date('fecha_impresion')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->integer('total_hojas');
+            $table->string('engargolado');
+            $table->string('pago');
+            $table->string('descripcion')->nullable();
+            $table->string('estado');
+            $table->decimal('coste_impresion', 10, 2);
+            $table->string('encargado')->nullable();
             $table->timestamps();
         });
     }

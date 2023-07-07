@@ -13,18 +13,16 @@
                         <form action="{{ route('users.update', $user->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-
                             <div class="row">
-                                <!-- Matrícula -->
+                                <!-- Matrícula || Clave Administrativa -->
                                 <div class="col-md-3 mb-2">
                                     <div class="form-outline">
-                                        <label class="form-label" for="matricula">Matrícula | Clave</label>
+                                        <label class="form-label" for="matricula">Matrícula | Clave Administrativa</label>
                                         <input type="text" id="matricula" class="form-control form-control-lg"
                                             placeholder="Ej. 213200350000" name="matricula" value="{{ $user->matricula }}"
                                             required autofocus disabled />
                                     </div>
                                 </div>
-
                                 <!-- Nombre -->
                                 <div class="col-md-3 mb-4">
                                     <div class="form-outline">
@@ -39,7 +37,6 @@
                                         @enderror
                                     </div>
                                 </div>
-
                                 <!-- Apellido Paterno -->
                                 <div class="col-md-3 mb-4">
                                     <div class="form-outline">
@@ -49,7 +46,6 @@
                                             value="{{ $user->apellido_paterno }}" required />
                                     </div>
                                 </div>
-
                                 <!-- Apellido Materno -->
                                 <div class="col-md-3 mb-4">
                                     <div class="form-outline">
@@ -60,7 +56,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <!-- Teléfono -->
                                 <div class="col-md-3 mb-4">
@@ -71,7 +66,6 @@
                                             required />
                                     </div>
                                 </div>
-
                                 <!-- Correo Electrónico -->
                                 <div class="col-md-9 mb-4">
                                     <div class="form-outline">
@@ -89,7 +83,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <!-- Licenciatura -->
                                 <div class="input-group mb-3">
@@ -116,7 +109,6 @@
                                         </span>
                                     @enderror
                                 </div>
-
                                 <!-- Tipo Usuario -->
                                 <div class="input-group mb-3">
                                     <label class="input-group-text @error('tipo_usuario') is-invalid @enderror"
@@ -138,7 +130,11 @@
                                 </div>
                             </div>
                             <div class="d-grid gap-2 mt-2 pt-2">
-                                <input type="submit" class="btn" id="bg-blue-benmac" value="Actualizar Usuario" />
+                                <button type="submit" class="btn" id="bg-blue-benmac">
+                                    Actualizar Usuario
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1008/1008958.png" alt="BENMAC"
+                                        class="icon-benmac">
+                                </button>
                             </div>
                         </form>
                     </div>

@@ -55,4 +55,14 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class);
     }
+
+    public function usersRecargas()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function usersEngargolados()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

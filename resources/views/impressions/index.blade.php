@@ -5,44 +5,41 @@
         <div class="row justify-content-center">
             <div class="col-md-12 mt-2">
 
-                {{-- Mensajes --}}
+                <!-- Mensajes De Éxito -->
                 @if ($message = Session::get('success'))
-                    <div class="alert alert-success text-center" role="alert">
-                        <p>{{ $message }}</p>
-                    </div>
-                @endif
-
-                {{-- Mensajes Error --}}
-                @if ($errors->any())
-                    <div class="alert alert-danger text-center" role="alert">
-                        @foreach ($errors->all() as $error)
-                            {{ $error }}
-                        @endforeach
+                    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                        <strong>Éxito En La Acción.</strong> {{ $message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
                 <div class="card">
                     <div class="card-header" id="bg-blue-benmac">
                         <div class="row">
-                            <div class="col-md-4 mt-1">
-                                ➤ Estadisticas De Las Impresiones
+                            <div class="col-md-3 mt-1">
+                                ➤ Detalles De Impresiones
                             </div>
-                            <div class="col-md-8 d-flex flex-row-reverse">
-                                {{-- Configurar Precios --}}
+                            <div class="col-md-9 d-flex flex-row-reverse">
+                                <!-- Impresoras -->
+                                <a href="{{ route('printers.index') }}" class="btn btn-primary btn-sm mx-1">
+                                    Impresoras
+                                    <img src="https://cdn-icons-png.flaticon.com/512/446/446991.png" alt="BENMAC"
+                                        class="icon-benmac">
+                                </a>
+                                <!-- Configurar Precios -->
                                 <a href="{{ route('vistaPrecios', $price->id) }}" class="btn btn-success btn-sm mx-1">
                                     Modificar Precios
                                     <img src="https://cdn-icons-png.flaticon.com/512/1/1437.png" alt="BENMAC"
                                         class="icon-benmac">
                                 </a>
-                                {{-- Modal: Reporte Individual --}}
+                                <!-- Modal: Reporte Individual -->
                                 <button type="button" class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal01">
                                     Reporte Individual
                                     <img src="https://cdn-icons-png.flaticon.com/512/709/709722.png" alt="BENMAC"
                                         class="icon-benmac">
                                 </button>
-
-                                {{-- Modal: Reporte Individual --}}
+                                <!-- Modal: Reporte Individual -->
                                 <div class="modal fade" id="exampleModal01" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -60,7 +57,7 @@
                                                 <form action="{{ route('individual') }}" method="GET">
                                                     @csrf
                                                     <div class="row">
-                                                        {{-- Matrícula --}}
+                                                        <!-- Matrícula || Clave Administrativa -->
                                                         <div class="col-md-12 mb-2">
                                                             <div class="form-outline">
                                                                 <label class="form-label text-dark" for="matricula">
@@ -68,28 +65,30 @@
                                                                 </label>
                                                                 <input type="text" id="matricula" class="form-control"
                                                                     placeholder="Ej. 213200350000" name="matricula_reporte"
-                                                                    autofocus />
+                                                                    autofocus required />
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="d-grid gap-2 pt-2">
-                                                        <input class="btn" id="bg-blue-benmac" type="submit"
-                                                            value="Descargar Reporte Individual" />
+                                                        <button class="btn btn-success" id="bg-blue-benmac" type="submit">
+                                                            Descargar Reporte Individual
+                                                            <img src="https://cdn-icons-png.flaticon.com/512/2382/2382067.png"
+                                                                alt="BENMAC" class="icon-benmac">
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {{-- Modal: Reporte Licenciatura --}}
+                                <!-- Modal: Reporte Licenciatura -->
                                 <button type="button" class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal02">
                                     Reporte Licenciatura
                                     <img src="https://cdn-icons-png.flaticon.com/512/5305/5305730.png" alt="BENMAC"
                                         class="icon-benmac">
                                 </button>
-
-                                {{-- Modal: Reporte Licenciatura --}}
+                                <!-- Modal: Reporte Licenciatura -->
                                 <div class="modal fade" id="exampleModal02" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -106,9 +105,29 @@
                                             <div class="modal-body">
                                                 <form action="{{ route('licenciatura') }}" method="GET">
                                                     @csrf
+                                                    <div class="row mb-2">
+                                                        <!-- Mes | Año -->
+                                                        <div class="form-group">
+                                                            <label class="form-label text-dark">
+                                                                Ingresa El Periodio Inicial
+                                                            </label>
+                                                            <input class="form-control" type="date"
+                                                                name="lic_fecha_reporte_inicio" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row mb-3">
+                                                        <!-- Mes | Año -->
+                                                        <div class="form-group">
+                                                            <label class="form-label text-dark">
+                                                                Ingresa El Periodo Final
+                                                            </label>
+                                                            <input class="form-control" type="date"
+                                                                name="lic_fecha_reporte_fin" required>
+                                                        </div>
+                                                    </div>
                                                     <div class="row">
                                                         <!-- Licenciatura -->
-                                                        <div class="input-group mb-3">
+                                                        <div class="input-group mt-2 mb-3">
                                                             <label class="input-group-text">Licenciatura</label>
                                                             <select class="form-select" name="licenciatura_reporte"
                                                                 required>
@@ -133,30 +152,33 @@
                                                         </div>
                                                     </div>
                                                     <div class="d-grid gap-2 pt-2">
-                                                        <input class="btn btn-success" id="bg-blue-benmac" type="submit"
-                                                            value="Descargar Reporte Por Licenciatura" />
+                                                        <button class="btn btn-success" id="bg-blue-benmac"
+                                                            type="submit">
+                                                            Descargar Reporte Por Licenciatura
+                                                            <img src="https://cdn-icons-png.flaticon.com/512/2382/2382067.png"
+                                                                alt="BENMAC" class="icon-benmac">
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                {{-- Modal: Reporte General Mensual --}}
+                                <!-- Modal: Reporte General Mensual -->
                                 <button type="button" class="btn btn-danger btn-sm mx-1" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal03">
-                                    Reporte Mensual
+                                    Reporte General
                                     <img src="https://cdn-icons-png.flaticon.com/512/2838/2838764.png" alt="BENMAC"
                                         class="icon-benmac">
                                 </button>
-
-                                {{-- Modal: Reporte General Mensual --}}
+                                <!-- Modal: Reporte General Mensual -->
                                 <div class="modal fade" id="exampleModal03" tabindex="-1"
                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header" id="bg-blue-benmac">
                                                 <h5 class="modal-title" id="exampleModalLabel">
-                                                    Generar Reporte Mensual General
+                                                    Generar Reporte General
                                                     <img src="https://cdn-icons-png.flaticon.com/512/2838/2838764.png"
                                                         alt="BENMAC" class="icon-benmac">
                                                 </h5>
@@ -166,20 +188,33 @@
                                             <div class="modal-body">
                                                 <form action="{{ route('mensual-general') }}" method="GET">
                                                     @csrf
-                                                    <div class="row">
-                                                        {{-- Mes | Año --}}
+                                                    <div class="row mb-2">
+                                                        <!-- Mes | Año -->
                                                         <div class="form-group">
                                                             <label class="form-label text-dark">
-                                                                Ingresa Mes y Año
+                                                                Ingresa El Periodio Inicial
                                                             </label>
-                                                            <input class="form-control" type="month"
-                                                                name="fecha_reporte">
+                                                            <input class="form-control" type="date"
+                                                                name="fecha_reporte_inicio" required>
                                                         </div>
-
+                                                    </div>
+                                                    <div class="row">
+                                                        <!-- Mes | Año -->
+                                                        <div class="form-group">
+                                                            <label class="form-label text-dark">
+                                                                Ingresa El Periodo Final
+                                                            </label>
+                                                            <input class="form-control" type="date"
+                                                                name="fecha_reporte_fin" required>
+                                                        </div>
                                                     </div>
                                                     <div class="d-grid gap-2 mt-2 pt-2">
-                                                        <input class="btn" id="bg-blue-benmac" type="submit"
-                                                            value="Descargar Reporte Mensual General" />
+                                                        <button class="btn btn-success" id="bg-blue-benmac"
+                                                            type="submit">
+                                                            Descargar Reporte General
+                                                            <img src="https://cdn-icons-png.flaticon.com/512/2382/2382067.png"
+                                                                alt="BENMAC" class="icon-benmac">
+                                                        </button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -193,7 +228,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-12">
-                                    <!-- Columna completa -->
+                                    <!-- Gráfica -->
                                     <div class="card">
                                         <div class="card-header text-center" id="bg-blue-benmac">
                                             Gasto General Por Licenciatura
@@ -210,7 +245,7 @@
                             </div>
                             <div class="row mt-4">
                                 <div class="col-12">
-                                    <!-- Columna combinada -->
+                                    <!-- Impresora Más Utilizada -->
                                     <div class="card" id="fix-table">
                                         <div class="card-header text-center" id="bg-blue-benmac">
                                             Impresoras Más Utilizada Por Licenciatura
@@ -240,10 +275,9 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row d-flex justify-content-around mt-4">
                                 <div class="col-3" id="fix-col">
-                                    <!-- Primera columna pequeña -->
+                                    <!-- Total General -->
                                     <div class="card">
                                         <div class="card-header text-center" id="bg-blue-benmac">
                                             Total General
@@ -261,9 +295,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-3" id="fix-col">
-                                    <!-- Segunda columna pequeña -->
+                                    <!-- Total Impresiones -->
                                     <div class="card">
                                         <div class="card-header text-center" id="bg-blue-benmac">
                                             Total Impresiones
@@ -279,9 +312,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-3" id="fix-col">
-                                    <!-- Primera columna pequeña -->
+                                    <!-- Total De Impresiones A Color -->
                                     <div class="card">
                                         <div class="card-header text-center" id="bg-blue-benmac">
                                             Impresiones: Color
@@ -299,9 +331,8 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="col-3" id="fix-col">
-                                    <!-- Segunda columna pequeña -->
+                                    <!-- Total De Impresiones A B/N -->
                                     <div class="card">
                                         <div class="card-header text-center" id="bg-blue-benmac">
                                             Impresiones: B/N
@@ -331,13 +362,11 @@
         var labels = [];
         var data = [];
 
-        // Recorrer los resultados de la consulta y extraer los datos
         @foreach ($resultado as $item)
             labels.push('{{ $item->licenciatura }}');
             data.push({{ $item->suma_coste_impresion_licenciatura }});
         @endforeach
 
-        // Configuración de la gráfica
         var config = {
             type: 'bar',
             data: {
@@ -363,10 +392,8 @@
             }
         };
 
-        // Obtener el contexto del lienzo de la gráfica
         var ctx = document.getElementById('myChart').getContext('2d');
 
-        // Crear la gráfica
         var myChart = new Chart(ctx, config);
     </script>
 @endsection

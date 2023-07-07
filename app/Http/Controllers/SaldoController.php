@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Recharge;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\MessageBag;
+use App\Mail\Ticket;
+use Illuminate\Support\Facades\Mail;
 
 class SaldoController extends Controller
 {
-
     /*
     Función: Cargar saldo a un usuario.
     */
@@ -27,6 +31,25 @@ class SaldoController extends Controller
                 $usuario->saldo += $cantidad; // Incrementa El Saldo
 
                 $usuario->save();
+
+                $nombre = Auth::user()->name;
+                $ap = Auth::user()->apellido_paterno;
+                $am = Auth::user()->apellido_materno;
+                $encargado = $nombre . " " . $ap . " " . $am;
+
+                $recarga = new Recharge();
+                $recarga->user_id = $id;
+                $recarga->monto = $cantidad;
+                $recarga->encargado = $encargado;
+                $recarga->save();
+
+                $fecha_recarga = Carbon::now();
+
+                $fecha = $fecha_recarga->toDateString();
+
+                $destinatario = $usuario->email;
+                $correo = new Ticket($usuario, $cantidad, $fecha, $encargado);
+                Mail::to($destinatario)->send($correo);
 
                 return redirect()->route('users.index')->with('success', 'Se Agrego El Saldo Correctamente.');
             } else {
@@ -51,9 +74,28 @@ class SaldoController extends Controller
 
         if ($usuario) {
             if (is_numeric($cantidad) && $cantidad >= 0) { // Valida Que La Cantidad Sea Un Valor Númerico Y Que Sea Positivo
+                $id = $usuario->id;
                 $usuario->saldo += $cantidad;
-
                 $usuario->save();
+
+                $nombre = Auth::user()->name;
+                $ap = Auth::user()->apellido_paterno;
+                $am = Auth::user()->apellido_materno;
+                $encargado = $nombre . " " . $ap . " " . $am;
+
+                $recarga = new Recharge();
+                $recarga->user_id = $id;
+                $recarga->monto = $cantidad;
+                $recarga->encargado = $encargado;
+                $recarga->save();
+
+                $fecha_recarga = Carbon::now();
+
+                $fecha = $fecha_recarga->toDateString();
+
+                $destinatario = $usuario->email;
+                $correo = new Ticket($usuario, $cantidad, $fecha, $encargado);
+                Mail::to($destinatario)->send($correo);
 
                 return redirect()->route('users.index')->with('success', 'Se Agrego El Saldo Correctamente.');
             }
@@ -87,7 +129,6 @@ class SaldoController extends Controller
                     return redirect()->back()->withErrors($errors);
                 } else {
                     $usuario->saldo -= $cantidad;
-
                     $usuario->save();
 
                     return redirect()->route('users.index')->with('success', 'Se Quito El Saldo Correctamente.');

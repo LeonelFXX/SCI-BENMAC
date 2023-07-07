@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterController extends Controller
 {
@@ -48,7 +49,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    public function validator(array $data)
     {
         return Validator::make($data, [
             'matricula' => ['required', 'string', 'max:255', 'unique:users'],
@@ -79,7 +80,7 @@ class RegisterController extends Controller
                 },
             ],
 
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'confirmed', Password::defaults()],
             'licenciatura' => ['required', 'string', 'max:255']
         ]);
     }
@@ -90,17 +91,17 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    public function create(array $data)
     {
         return User::create([
-            'matricula' => $data['matricula'],
-            'name' => $data['name'],
-            'apellido_paterno' => $data['apellido_paterno'],
-            'apellido_materno' => $data['apellido_materno'],
-            'telefono' => $data['telefono'],
-            'email' => $data['email'],
+            'matricula' => ($data['matricula']),
+            'name' => ($data['name']),
+            'apellido_paterno' => ($data['apellido_paterno']),
+            'apellido_materno' => ($data['apellido_materno']),
+            'telefono' => ($data['telefono']),
+            'email' => ($data['email']),
             'password' => Hash::make($data['password']),
-            'licenciatura' => $data['licenciatura'],
+            'licenciatura' => ($data['licenciatura'])
         ]);
     }
 }
