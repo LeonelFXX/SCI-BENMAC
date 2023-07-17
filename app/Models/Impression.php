@@ -17,6 +17,7 @@ class Impression extends Model
         'tamaño',
         'color',
         'impresora',
+        'ubicacion',
         'fecha_impresion',
         'total_hojas',
         'engargolado',

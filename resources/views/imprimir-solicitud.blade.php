@@ -64,9 +64,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row d-flex justify-content-center">
+                        <div class="row d-flex justify-content-between">
                             <!-- Impresora -->
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-3 mb-2">
                                 <div class="form-outline">
                                     <label class="form-label">Impresora</label>
                                     <input type="text" class="form-control form-control-lg"
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                             <!-- Engargolado -->
-                            <div class="col-md-4 mb-2">
+                            <div class="col-md-5 mb-2">
                                 <div class="form-outline">
                                     <label class="form-label">Engargolado</label>
                                     <input type="text" class="form-control form-control-lg"
@@ -91,12 +91,22 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 mt-2 mb-2">
+                            <!-- Ubicación -->
+                            <div class="col-md-12 mb-2">
+                                <div class="form-outline">
+                                    <label class="form-label">Ubicación De La Impresora</label>
+                                    <input type="text" class="form-control form-control-lg"
+                                        value="{{ $impresion->ubicacion }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
                                 <div class="form-outline">
                                     <label for="descripcion" class="mb-2">
                                         Justificación De Impresión
                                     </label>
-                                    <textarea class="form-control" id="descripcion" disabled>{{ $impresion->descripcion }}</textarea>
+                                    <textarea class="form-control" id="descripcion" rows="2" disabled>{{ $impresion->descripcion }}</textarea>
                                 </div>
                             </div>
                         </div>

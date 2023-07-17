@@ -36,6 +36,7 @@ class AuthServiceProvider extends ServiceProvider
         $usuario = Role::where('name', 'Usuario')->first();
 
         // Administrador
+        $admin_general->givePermissionTo('accederAdministradorGeneral');
         $admin_general->givePermissionTo('accederImpresiones');
         $admin_general->givePermissionTo('accederUsuarios');
         $admin_general->givePermissionTo('accederEngargolados');

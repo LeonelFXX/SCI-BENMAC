@@ -2,17 +2,17 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-5 mt-2">
-                <!-- Mensajes De Error -->
-                @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        @foreach ($errors->all() as $error)
-                            <strong>¡Error!</strong> {{ $error }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        @endforeach
-                    </div>
-                @endif
+        <div class="row justify-content-center mt-2">
+            <!-- Mensajes De Error -->
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    @foreach ($errors->all() as $error)
+                        <strong>¡Error!</strong> {{ $error }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    @endforeach
+                </div>
+            @endif
+            <div class="col-md-5">
                 <div class="card text-center shadow-lg">
                     <div class="card-header text-center" id="bg-blue-benmac">
                         {{ __('Buscar Usuario') }}

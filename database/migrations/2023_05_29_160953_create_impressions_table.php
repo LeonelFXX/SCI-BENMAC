@@ -21,6 +21,7 @@ return new class extends Migration {
             $table->string('tamaño');
             $table->string('color');
             $table->string('impresora');
+            $table->string('ubicacion');
             $table->date('fecha_impresion')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('total_hojas');
             $table->string('engargolado');

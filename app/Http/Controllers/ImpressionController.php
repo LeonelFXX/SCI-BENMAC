@@ -145,6 +145,7 @@ class ImpressionController extends Controller
                 $registro->tamaño = $tamaño;
                 $registro->color = $printer->color;
                 $registro->impresora = $printer->nombre;
+                $registro->ubicacion = $printer->ubicacion;
                 $registro->total_hojas = $total_hojas;
                 $registro->engargolado = $estado;
                 $registro->pago = "Si";
@@ -413,6 +414,7 @@ class ImpressionController extends Controller
             $registro->tamaño = $tamaño;
             $registro->color = $printer->color;
             $registro->impresora = $printer->nombre;
+            $registro->ubicacion = $printer->ubicacion;
             $registro->total_hojas = $total_hojas;
             $registro->engargolado = $estado;
             $registro->pago = 'No';

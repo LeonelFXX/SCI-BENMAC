@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->decimal('saldo', 10, 2)->default(0.00);
-            $table->string('tipo_usuario')->default('6');
+            $table->string('tipo_usuario');
             $table->rememberToken(); 
             $table->timestamps();
         });

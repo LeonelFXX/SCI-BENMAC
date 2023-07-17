@@ -5,13 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Printer extends Model
+class Copy extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nombre',
+        'id',
+        'user_id',
+        'numero_copias',
         'color',
-        'ubicacion'
+        'blanco_y_negro',
+        'coste_copias',
+        'fecha_copias',
+        'estado',
+        'encargado'
     ];
 }

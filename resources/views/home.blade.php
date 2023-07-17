@@ -137,7 +137,7 @@
                                                             <!-- Impresora -->
                                                             <div class="col-md-12 mb-2">
                                                                 <label class="form-label" for="autoSizingSelect01">
-                                                                    Impresora Y Color
+                                                                    Impresora, Color Y Ubicación
                                                                 </label>
                                                                 <select class="form-select" id="autoSizingSelect01"
                                                                     name="impresora">
@@ -147,6 +147,7 @@
                                                                     @foreach ($printers as $printer)
                                                                         <option value="{{ $printer->id }}">
                                                                             {{ $printer->nombre }} ({{ $printer->color }})
+                                                                            {{ $printer->ubicacion }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
@@ -228,137 +229,74 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @role('Administrador_General|Personal_Administrativo')
-                                        <!-- Modal: Solicitar Impresión -->
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal05">
-                                            Solicitar Impresión
-                                            <img src="https://cdn-icons-png.flaticon.com/512/2874/2874791.png" alt="BENMAC"
-                                                class="icon-benmac">
-                                        </button>
-                                        <!-- Modal: Solicitar Impresión -->
-                                        <div class="modal fade" id="exampleModal05" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header" id="bg-blue-benmac">
-                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                            Solicitar Una Impresión "No Pago"
-                                                            <img src="https://cdn-icons-png.flaticon.com/512/2874/2874791.png"
-                                                                alt="BENMAC" class="icon-benmac">
-                                                        </h5>
-                                                        <button type="button" class="btn-close btn-close-white"
-                                                            data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{ route('solicitarImpresion') }}" method="POST">
-                                                            @csrf
-                                                            <div class="row">
-                                                                <!-- Número De Hojas -->
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <h6 class="h6">
-                                                                            Número De Hojas
-                                                                        </h6>
-                                                                        <input type="number" id="numero_hojas"
-                                                                            class="form-control @error('numero_hojas') is-invalid @enderror"
-                                                                            placeholder="#" name="numero_hojas"
-                                                                            value="{{ old('numero_hojas') }}" required
-                                                                            autofocus />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <!-- Número De Copias -->
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <label class="form-label" for="numero_copias">
-                                                                            Número
-                                                                            De
-                                                                            Copias</label>
-                                                                        <input type="number" id="numero_copias"
-                                                                            class="form-control @error('numero_copias') is-invalid @enderror"
-                                                                            placeholder="#" name="numero_copias"
-                                                                            value="{{ old('numero_copias') }}" required />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mt-2">
-                                                                <!-- Tamaño -->
-                                                                <div class="col-md-12 mb-2">
-                                                                    <label class="form-label" for="autoSizingSelect">
-                                                                        Tamaño De Papel
+                                    <!-- Modal: Copias -->
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal10">
+                                        Solicitar Copias
+                                        <img src="https://cdn-icons-png.flaticon.com/512/4700/4700444.png" alt="BENMAC"
+                                            class="icon-benmac">
+                                    </button>
+                                    <!-- Modal: Copias -->
+                                    <div class="modal fade" id="exampleModal10" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header" id="bg-blue-benmac">
+                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                        Configura Tú Solicitud De Copias
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/4700/4700444.png"
+                                                            alt="BENMAC" class="icon-benmac">
+                                                    </h5>
+                                                    <button type="button" class="btn-close btn-close-white"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ route('solicitarCopias') }}" method="POST">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <!-- Número De Hojas A Color -->
+                                                            <div class="col-md-12 mb-2">
+                                                                <div class="form-outline">
+                                                                    <label class="form-label" for="color">
+                                                                        Número De Hojas A Color
+                                                                        <img src="https://cdn-icons-png.flaticon.com/512/2071/2071669.png"
+                                                                            alt="BENMAC" class="icon-benmac">
                                                                     </label>
-                                                                    <select class="form-select" id="autoSizingSelect"
-                                                                        name="tamaño">
-                                                                        <option selected disabled>Escoge Una Opción...
-                                                                        </option>
-                                                                        <option value="Carta">Carta</option>
-                                                                        <option value="Oficio">Oficio</option>
-                                                                    </select>
+                                                                    <input type="number" id="color"
+                                                                        class="form-control @error('color') is-invalid @enderror"
+                                                                        placeholder="0" name="color"
+                                                                        value="{{ old('color') }}" required autofocus />
                                                                 </div>
                                                             </div>
-                                                            <div class="row mt-2">
-                                                                <!-- Impresora -->
-                                                                <div class="col-md-12 mb-2">
-                                                                    <label class="form-label" for="autoSizingSelect01">
-                                                                        Impresora Y Color
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <!-- Número De Copias A Blanco Y Negro -->
+                                                            <div class="col-md-12 mb-2">
+                                                                <div class="form-outline">
+                                                                    <label class="form-label" for="blanco_y_negro">
+                                                                        Número De Hojas A Blanco Y Negro
+                                                                        <img src="https://cdn-icons-png.flaticon.com/512/2071/2071669.png"
+                                                                            alt="BENMAC" class="icon-benmac-gray">
                                                                     </label>
-                                                                    <select class="form-select" id="autoSizingSelect01"
-                                                                        name="impresora">
-                                                                        <option selected disabled>
-                                                                            Escoge Una Opción...
-                                                                        </option>
-                                                                        @foreach ($printers as $printer)
-                                                                            <option value="{{ $printer->id }}">
-                                                                                {{ $printer->nombre }} ({{ $printer->color }}) 
-                                                                            </option>
-                                                                        @endforeach
-                                                                    </select>
+                                                                    <input type="number" id="blanco_y_negro"
+                                                                        class="form-control @error('blanco_y_negro') is-invalid @enderror"
+                                                                        placeholder="0" name="blanco_y_negro"
+                                                                        value="{{ old('blanco_y_negro') }}" required />
                                                                 </div>
                                                             </div>
-                                                            <div class="row mt-2">
-                                                                <!-- Engargolado -->
-                                                                <div class="col-md-12 mb-2 d-flex justify-content-evenly">
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            value="1" id="checkbox3"
-                                                                            name="sin_engargolado" checked>
-                                                                        <label class="form-check-label" for="checkbox3">
-                                                                            Sin Engargolado
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="form-check form-check-inline">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            value="2" id="checkbox4"
-                                                                            name="con_engargolado">
-                                                                        <label class="form-check-label" for="checkbox4">
-                                                                            Con Engargolado
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row mt-2 mb-2">
-                                                                <div class="form-group">
-                                                                    <label for="descripcion" class="mb-2">
-                                                                        Justifica La Impresión
-                                                                    </label>
-                                                                    <textarea class="form-control" id="descripcion" rows="2" name="descripcion"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-grid gap-2 pt-2">
-                                                                <button type="submit" class="btn" id="bg-blue-benmac">
-                                                                    Solicitar
-                                                                    <img src="https://cdn-icons-png.flaticon.com/512/1008/1008958.png"
-                                                                        alt="BENMAC" class="icon-benmac">
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
+                                                        </div>
+                                                        <div class="d-grid gap-2 mt-2 pt-2">
+                                                            <button type="submit" class="btn" id="bg-blue-benmac">
+                                                                Solicitar
+                                                                <img src="https://cdn-icons-png.flaticon.com/512/1008/1008958.png"
+                                                                    alt="BENMAC" class="icon-benmac">
+                                                            </button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endrole
+                                    </div>
                                 @else
                                     <!-- Modal: Sin Saldo -->
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal"
@@ -395,6 +333,137 @@
                                         </div>
                                     </div>
                                 @endif
+                                @role('Administrador_General|Personal_Administrativo')
+                                    <!-- Modal: Solicitar Impresión -->
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal05">
+                                        Solicitar Impresión
+                                        <img src="https://cdn-icons-png.flaticon.com/512/2874/2874791.png" alt="BENMAC"
+                                            class="icon-benmac">
+                                    </button>
+                                    <!-- Modal: Solicitar Impresión -->
+                                    <div class="modal fade" id="exampleModal05" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header" id="bg-blue-benmac">
+                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                        Solicitar Una Impresión "No Pago"
+                                                        <img src="https://cdn-icons-png.flaticon.com/512/2874/2874791.png"
+                                                            alt="BENMAC" class="icon-benmac">
+                                                    </h5>
+                                                    <button type="button" class="btn-close btn-close-white"
+                                                        data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ route('solicitarImpresion') }}" method="POST">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <!-- Número De Hojas -->
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <h6 class="h6">
+                                                                        Número De Hojas
+                                                                    </h6>
+                                                                    <input type="number" id="numero_hojas"
+                                                                        class="form-control @error('numero_hojas') is-invalid @enderror"
+                                                                        placeholder="#" name="numero_hojas"
+                                                                        value="{{ old('numero_hojas') }}" required
+                                                                        autofocus />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <!-- Número De Copias -->
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label" for="numero_copias">
+                                                                        Número
+                                                                        De
+                                                                        Copias</label>
+                                                                    <input type="number" id="numero_copias"
+                                                                        class="form-control @error('numero_copias') is-invalid @enderror"
+                                                                        placeholder="#" name="numero_copias"
+                                                                        value="{{ old('numero_copias') }}" required />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <!-- Tamaño -->
+                                                            <div class="col-md-12 mb-2">
+                                                                <label class="form-label" for="autoSizingSelect">
+                                                                    Tamaño De Papel
+                                                                </label>
+                                                                <select class="form-select" id="autoSizingSelect"
+                                                                    name="tamaño">
+                                                                    <option selected disabled>Escoge Una Opción...
+                                                                    </option>
+                                                                    <option value="Carta">Carta</option>
+                                                                    <option value="Oficio">Oficio</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <!-- Impresora -->
+                                                            <div class="col-md-12 mb-2">
+                                                                <label class="form-label" for="autoSizingSelect01">
+                                                                    Impresora, Color Y Ubicación
+                                                                </label>
+                                                                <select class="form-select" id="autoSizingSelect01"
+                                                                    name="impresora">
+                                                                    <option selected disabled>
+                                                                        Escoge Una Opción...
+                                                                    </option>
+                                                                    @foreach ($printers as $printer)
+                                                                        <option value="{{ $printer->id }}">
+                                                                            {{ $printer->nombre }} ({{ $printer->color }})
+                                                                            {{ $printer->ubicacion }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-2">
+                                                            <!-- Engargolado -->
+                                                            <div class="col-md-12 mb-2 d-flex justify-content-evenly">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="1" id="checkbox3" name="sin_engargolado"
+                                                                        checked>
+                                                                    <label class="form-check-label" for="checkbox3">
+                                                                        Sin Engargolado
+                                                                    </label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        value="2" id="checkbox4" name="con_engargolado">
+                                                                    <label class="form-check-label" for="checkbox4">
+                                                                        Con Engargolado
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mt-2 mb-2">
+                                                            <div class="form-group">
+                                                                <label for="descripcion" class="mb-2">
+                                                                    Justifica La Impresión
+                                                                </label>
+                                                                <textarea class="form-control" id="descripcion" rows="2" name="descripcion"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-grid gap-2 pt-2">
+                                                            <button type="submit" class="btn" id="bg-blue-benmac">
+                                                                Solicitar
+                                                                <img src="https://cdn-icons-png.flaticon.com/512/1008/1008958.png"
+                                                                    alt="BENMAC" class="icon-benmac">
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endrole
                             </div>
                         </div>
                     </div>

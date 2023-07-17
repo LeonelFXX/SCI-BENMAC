@@ -66,10 +66,9 @@ class UserController extends Controller
             ],
 
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'tipo_usuario' => ['required', 'string', 'max:255']
         ]);
 
-        $usuario = User::create([
+        User::create([
             'matricula' => $request->matricula,
             'name' => $request->name,
             'apellido_paterno' => $request->apellido_paterno,
@@ -78,12 +77,8 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'licenciatura' => 'Personal Administrativo',
-            'tipo_usuario' => $request->tipo_usuario
+            'tipo_usuario' => '5'
         ]);
-
-        $rol = Role::find(5);
-        $usuario->assignRole($rol);
-        $usuario->save();
 
         return redirect()->route('users.index')->with('success', 'Nuevo Usuario Creado Correctamente.');
     }

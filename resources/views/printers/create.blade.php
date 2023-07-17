@@ -32,7 +32,7 @@
                         <form action="{{ route('printers.store') }}" method="POST">
                             @csrf
                             <div class="row">
-                                <div class="col-md-12 mb-2">
+                                <div class="col-md-12">
                                     <div class="form-outline">
                                         <!-- Nombre -->
                                         <label for="nombre" class="form-label">
@@ -50,13 +50,25 @@
                                         <label for="color" class="form-label">
                                             Color:
                                         </label>
-                                        <select class="form-select" id="autoSizingSelect01" name="color">
+                                        <select class="form-select" id="autoSizingSelect01" name="color" required>
                                             <option selected disabled>
                                                 Escoge Una Opción...
                                             </option>
                                             <option value="Blanco Y Negro">Blanco Y Negro</option>
                                             <option value="Color">Color</option>
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 mt-2">
+                                    <div class="form-outline">
+                                        <!-- Ubicación -->
+                                        <label for="ubicacion" class="form-label">
+                                            Ubicación:
+                                        </label>
+                                        <input type="text" id="ubicacion" class="form-control mb-3"
+                                            placeholder="Ubicación De Impresora" name="ubicacion" required />
                                     </div>
                                 </div>
                             </div>

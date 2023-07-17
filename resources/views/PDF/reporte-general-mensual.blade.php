@@ -1,7 +1,38 @@
 <center style="margin: 10px">
-    <h3>Reporte General: {{ $diaInicial }} - {{ $mesInicial }} - {{ $añoInicial }} Hasta {{ $diaFinal }} - {{ $mesFinal }} - {{ $añoFinal }}</h3>
+    <h3>Reporte General: {{ $diaInicial }} - {{ $mesInicial }} - {{ $añoInicial }} Hasta {{ $diaFinal }} -
+        {{ $mesFinal }} - {{ $añoFinal }}</h3>
 
     <hr>
+    <br>
+
+    <!-- Detalles Sobre Recargos -->
+    <table style="margin: 0 auto;
+      font-family: Arial, Helvetica, sans-serif;
+      width: 650px;">
+        <thead style="background: #131921;
+                  color: #fff;
+                  height: 70px;">
+            <tr>
+                <th colspan="2">Detalles Individuales Sobre Recargas</th>
+            </tr>
+            <tr>
+                <th>Número De Recargas</th>
+                <th>Total ($)</th>
+            </tr>
+        </thead>
+        <tbody
+            style="font-family: Arial, Helvetica, sans-serif;
+              text-align: center;
+              background: #a5a19d;">
+            <tr style="height: 25px">
+                @foreach ($recargas as $datos)
+                    <td>{{ $datos->veces_recargos }}</td>
+                    <td>$ {{ $datos->total_recargado }}</td>
+                @endforeach
+            </tr>
+        </tbody>
+    </table>
+
     <br>
 
     <!-- Detalles Sobre El Gasto En Impresiones - PAGADAS -->
@@ -92,6 +123,68 @@
                 <tr style="height: 25px">
                     <td>{{ $tipo->color }}</td>
                     <td>{{ $tipo->tipo_color }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <br>
+
+    <!-- Detalles Sobre Engargolados - PAGADOS -->
+    <table style="margin: 0 auto;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 650px;">
+        <thead style="background: #131921;
+                        color: #fff;
+                        height: 70px;">
+            <tr>
+                <th colspan="2">Detalles Sobre Engargolados Pagados</th>
+            </tr>
+            <tr>
+                <th>Total ($)</th>
+                <th>Total Engargolados</th>
+            </tr>
+        </thead>
+        <tbody
+            style="font-family: Arial, Helvetica, sans-serif;
+                    text-align: center;
+                    background: #a5a19d;">
+            @foreach ($engargolados as $datos)
+                <tr style="height: 25px">
+                    <td>$ {{ $datos->total_coste_engargolados }}</td>
+                    <td>{{ $datos->suma_total_engargolados }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    <br>
+
+    <!-- Detalles Sobre El Gasto En Copias -->
+    <table style="margin: 0 auto;
+            font-family: Arial, Helvetica, sans-serif;
+            width: 650px;">
+        <thead style="background: #131921;
+                        color: #fff;
+                        height: 70px;">
+            <tr>
+                <th colspan="3">Detalles Sobre El Gasto En Copias</th>
+            </tr>
+            <tr>
+                <th>Solicitudes De Copiado</th>
+                <th>Total De Hojas</th>
+                <th>Total ($)</th>
+            </tr>
+        </thead>
+        <tbody
+            style="font-family: Arial, Helvetica, sans-serif;
+                    text-align: center;
+                    background: #a5a19d;">
+            @foreach ($copias as $datos)
+                <tr style="height: 25px">
+                    <td>{{ $datos->num_copias }}</td>
+                    <td>{{ $datos->total_copias }}</td>
+                    <td>$ {{ $datos->coste_total }}</td>
                 </tr>
             @endforeach
         </tbody>

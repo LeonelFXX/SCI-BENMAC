@@ -36,6 +36,8 @@ class QueryController extends Controller
         $mesFinal = $fechaFinal->month;
         $añoFinal = $fechaFinal->year;
 
+        $price = Price::find(1);
+
         // Datos De Licenciaturas
         $totales_licenciatura = DB::table('impressions')
             ->join('users', 'impressions.user_id', '=', 'users.id')
@@ -98,6 +100,31 @@ class QueryController extends Controller
             ->groupBy('color')
             ->get();
 
+        // Datos Sobre Recargas
+        $recargas = DB::table('users')
+            ->join('recharges', 'users.id', '=', 'recharges.user_id')
+            ->whereBetween('fecha_recarga', [$fechaInicial, $fechaFinal])
+            ->select(DB::raw('COUNT(recharges.user_id) AS veces_recargos, SUM(recharges.monto) AS total_recargado'))
+            ->get();
+
+        // Datos De Engargolados
+        $engargolados = DB::table('bindings')
+            ->select(
+                DB::raw('SUM(bindings.coste_engargolado) AS total_coste_engargolados'),
+                DB::raw('COUNT(bindings.id) AS suma_total_engargolados')
+            )
+            ->join('users', 'bindings.user_id', '=', 'users.id')
+            ->whereBetween('bindings.fecha_engargolado', [$fechaInicial, $fechaFinal])
+            ->where('bindings.coste_engargolado', '=', $price->engargolado)
+            ->get();
+
+        // Datos Sobre Copias
+        $copias = DB::table('copies')
+            ->join('users', 'copies.user_id', '=', 'users.id')
+            ->whereBetween('fecha_copias', [$fechaInicial, $fechaFinal])
+            ->select(DB::raw('COUNT(copies.user_id) AS num_copias, SUM(copies.numero_copias) AS total_copias, SUM(copies.coste_copias) AS coste_total'))
+            ->get();
+
 
         $pdf = PDF::loadView(
             'PDF.reporte-general-mensual',
@@ -112,7 +139,10 @@ class QueryController extends Controller
                 'totales_licenciatura',
                 'totales_generales',
                 'totales_generales_no_pago',
-                'impresiones'
+                'impresiones',
+                'recargas',
+                'engargolados',
+                'copias'
             )
         );
 
@@ -290,6 +320,22 @@ class QueryController extends Controller
             )
             ->get();
 
+        // Datos Sobre Recargas
+        $recargas = DB::table('users')
+            ->join('recharges', 'users.id', '=', 'recharges.user_id')
+            ->whereBetween('fecha_recarga', [$fechaInicial, $fechaFinal])
+            ->where('users.licenciatura', $licenciatura)
+            ->select(DB::raw('COUNT(recharges.user_id) AS veces_recargos, SUM(recharges.monto) AS total_recargado'))
+            ->get();
+
+        // Datos Sobre Copias
+        $copias = DB::table('copies')
+            ->join('users', 'copies.user_id', '=', 'users.id')
+            ->whereBetween('fecha_copias', [$fechaInicial, $fechaFinal])
+            ->where('users.licenciatura', $licenciatura)
+            ->select(DB::raw('COUNT(copies.user_id) AS num_copias, SUM(copies.numero_copias) AS total_copias, SUM(copies.coste_copias) AS coste_total'))
+            ->get();
+
         $pdf = PDF::loadView(
             'PDF.reporte-licenciatura',
             compact(
@@ -307,7 +353,9 @@ class QueryController extends Controller
                 'engargolados',
                 'totales_no_pago',
                 'historial_no_pago',
-                'impresiones'
+                'impresiones',
+                'recargas',
+                'copias'
             )
         );
 
@@ -380,19 +428,32 @@ class QueryController extends Controller
                     'users.matricula'
                 )
                 ->join('users', 'users.id', '=', 'impressions.user_id')
+                ->where('users.matricula', '=', $matricula)
                 ->where('users.licenciatura', '=', 'Personal Administrativo')
                 ->where('impressions.pago', '=', 'No')
                 ->where('impressions.estado', '=', 'Realizado')
                 ->get();
 
+            // Datos Sobre Recargas
+            $recargas = DB::table('users')
+                ->join('recharges', 'users.id', '=', 'recharges.user_id')
+                ->where('users.matricula', $matricula)
+                ->select(DB::raw('COUNT(recharges.user_id) AS veces_recargos, SUM(recharges.monto) AS total_recargado'))
+                ->get();
 
+            // Datos Sobre Copias
+            $copias = DB::table('copies')
+                ->join('users', 'copies.user_id', '=', 'users.id')
+                ->where('users.matricula', $matricula)
+                ->select(DB::raw('COUNT(copies.user_id) AS num_copias, SUM(copies.numero_copias) AS total_copias, SUM(copies.coste_copias) AS coste_total'))
+                ->get();
         } else {
             $errors->add('Error', 'La matrícula que ingresaste no se encuentra en los registros.');
 
             return redirect()->back()->withErrors($errors);
         }
 
-        $pdf = PDF::loadView('PDF.reporte-individual', compact('historial', 'totales', 'impresiones', 'usuario', 'engargolados', 'totales_engargolados', 'impresiones_no_pago'));
+        $pdf = PDF::loadView('PDF.reporte-individual', compact('historial', 'totales', 'impresiones', 'usuario', 'engargolados', 'totales_engargolados', 'impresiones_no_pago', 'recargas', 'copias'));
 
         $nombrePDF = 'Reporte De ' . $usuario->name . '.pdf';
 
@@ -413,7 +474,7 @@ class QueryController extends Controller
             ->join('impressions', 'users.id', '=', 'impressions.user_id')
             ->where('users.id', '=', $usuario->id)
             ->select('impressions.color', 'impressions.engargolado', 'impressions.total_hojas', 'impressions.fecha_impresion', 'impressions.coste_impresion')
-            ->orderByDesc('impressions.fecha_impresion')
+            ->orderBy('impressions.fecha_impresion', 'asc')
             ->take(10)
             ->get();
 
@@ -422,7 +483,7 @@ class QueryController extends Controller
             ->join('users', 'users.id', '=', 'recharges.user_id')
             ->where('users.id', $usuario->id)
             ->select('recharges.monto', 'recharges.fecha_recarga')
-            ->orderByDesc('recharges.fecha_recarga')
+            ->orderBy('recharges.fecha_recarga', 'asc')
             ->take(10)
             ->get();
 

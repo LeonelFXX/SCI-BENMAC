@@ -37,7 +37,7 @@
                                     <div class="col-md-2 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">Folio</label>
-                                            <input type="text" class="form-control form-control-lg"
+                                            <input type="text" class="form-control"
                                                 value="{{ $registro->id }}" disabled />
                                         </div>
                                     </div>
@@ -45,7 +45,7 @@
                                     <div class="col-md-2 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">N. Hojas</label>
-                                            <input type="text" class="form-control form-control-lg"
+                                            <input type="text" class="form-control"
                                                 value="{{ $registro->numero_hojas }}" disabled />
                                         </div>
                                     </div>
@@ -53,7 +53,7 @@
                                     <div class="col-md-2 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">N. Copias</label>
-                                            <input type="text" class="form-control form-control-lg"
+                                            <input type="text" class="form-control"
                                                 value="{{ $registro->numero_copias }}" disabled />
                                         </div>
                                     </div>
@@ -61,7 +61,7 @@
                                     <div class="col-md-2 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">T. Hojas</label>
-                                            <input type="text" class="form-control form-control-lg"
+                                            <input type="text" class="form-control"
                                                 value="{{ $registro->total_hojas }}" disabled />
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                     <div class="col-md-3 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">Tamaño</label>
-                                            <input type="text" class="form-control form-control-lg"
+                                            <input type="text" class="form-control"
                                                 value="{{ $registro->tamaño }}" disabled />
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                     <div class="col-md-4 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">Impresora</label>
-                                            <input type="text" class="form-control form-control-lg"
+                                            <input type="text" class="form-control"
                                                 value="{{ $registro->impresora }}" disabled />
                                         </div>
                                     </div>
@@ -87,7 +87,7 @@
                                     <div class="col-md-4 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">Color</label>
-                                            <input type="text" class="form-control form-control-lg"
+                                            <input type="text" class="form-control"
                                                 value="{{ $registro->color }}" disabled />
                                         </div>
                                     </div>
@@ -95,17 +95,27 @@
                                     <div class="col-md-4 mb-2">
                                         <div class="form-outline">
                                             <label class="form-label">Engargolado</label>
-                                            <input type="text" class="form-control form-control-lg"
+                                            <input type="text" class="form-control"
                                                 value="{{ $registro->engargolado }}" disabled>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- Ubicación -->
+                                    <div class="col-md-12">
+                                        <div class="form-outline">
+                                            <label class="form-label">Ubicación De La Impresora</label>
+                                            <input type="text" class="form-control"
+                                                value="{{ $registro->ubicacion }}" disabled>
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row d-flex justify-content-center">
                                     <div class="col-md-5 mt-2">
-                                        <h5 class="h5 text-center">
+                                        <h6 class="h6 text-center">
                                             Coste De Impresión: ${{ $registro->coste_impresion }}
-                                        </h5>
+                                        </h6>
                                     </div>
                                 </div>
                                 <hr>
@@ -150,11 +160,11 @@
                                     class="icon-benmac">
                             </div>
                             <div class="card-body">
-                                <h4 class="h4">
+                                <h5 class="h5">
                                     <span class="badge bg-success bg-sm">$
                                         {{ $saldo }} MXN
                                     </span>
-                                </h4>
+                                </h5>
                             </div>
                         </div>
                     </div>

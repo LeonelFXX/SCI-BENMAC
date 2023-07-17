@@ -17,7 +17,7 @@
                                 <!-- Matrícula || Clave Administrativa -->
                                 <div class="col-md-3 mb-2">
                                     <div class="form-outline">
-                                        <label class="form-label" for="matricula">Matrícula | Clave Administrativa</label>
+                                        <label class="form-label" for="matricula">Matrícula | Clave</label>
                                         <input type="text" id="matricula" class="form-control form-control-lg"
                                             placeholder="Ej. 213200350000" name="matricula" value="{{ $user->matricula }}"
                                             required autofocus disabled />

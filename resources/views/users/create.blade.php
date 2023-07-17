@@ -78,8 +78,8 @@
                                             Institucional</label>
                                         <input type="email" id="emailAddress"
                                             class="form-control form-control-lg @error('email') is-invalid @enderror"
-                                            placeholder="ejemplo@benmac.edu.mx" name="email" value="{{ $estudiante->email }}"
-                                            />
+                                            placeholder="ejemplo@benmac.edu.mx" name="email"
+                                            value="{{ $estudiante->email }}" />
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -111,27 +111,13 @@
                                             placeholder="Confirmar Contraseña" name="password_confirmation" required />
                                     </div>
                                 </div>
-                                <!-- Tipo Usuario -->
-                                <div class="input-group mb-3">
-                                    <label class="input-group-text @error('tipo_usuario') is-invalid @enderror"
-                                        for="inputGroupSelect02">Tipo De Usuario</label>
-                                    <select class="form-select" id="inputGroupSelect02" name="tipo_usuario" required>
-                                        <option selected disabled>Escoge Una Opción...</option>
-                                        @foreach ($roles as $role)
-                                            <option value="{{ $role->id }}">
-                                                {{ $role->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                    @error('tipo_usuario')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
                             </div>
                             <div class="d-grid gap-2 mt-2">
-                                <input type="submit" class="btn" id="bg-blue-benmac" value="Crear Usuario" />
+                                <button type="submit" class="btn" id="bg-blue-benmac">
+                                    Crear Usuario
+                                    <img src="https://cdn-icons-png.flaticon.com/512/2623/2623062.png" alt="BENMAC"
+                                        class="icon-benmac">
+                                </button>
                             </div>
                         </form>
                     </div>

@@ -74,6 +74,29 @@
                                     <a id="navbarDropdown-impressiones" class="nav-link text-white dropdown-toggle"
                                         role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                                         v-pre>
+                                        Copias
+                                        <img src="https://cdn-icons-png.flaticon.com/512/4700/4700444.png" alt="BENMAC"
+                                            class="icon-benmac">
+                                    </a>
+
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown-impressiones">
+                                        <a class="dropdown-item" href="{{ route('solicitudesCopias') }}">
+                                            Solicitudes Para Copias <span
+                                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                {{ $solicitudes_copias }}
+                                                <span class="visually-hidden">unread messages</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </li>
+                            @endrole
+
+                            @role('Administrador_General|Administrador_Engargolados')
+                                <!-- Impresiones -->
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown-impressiones" class="nav-link text-white dropdown-toggle"
+                                        role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                        v-pre>
                                         Engargolados
                                         <img src="https://cdn-icons-png.flaticon.com/512/3388/3388622.png" alt="BENMAC"
                                             class="icon-benmac">
@@ -155,6 +178,11 @@
                                     @role('Administrador_General|Personal_Administrativo')
                                         <a class="dropdown-item" href="{{ route('panel') }}">
                                             Solicitudes De Impresiones
+                                        </a>
+                                    @endrole
+                                    @role('Administrador_General|Usuario|Personal_Administrativo')
+                                        <a class="dropdown-item" href="{{ route('panelCopias') }}">
+                                            Solicitudes De Copias
                                         </a>
                                     @endrole
                                     @role('Administrador_General|Usuario|Personal_Administrativo')

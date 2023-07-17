@@ -8,7 +8,7 @@
                     <div class="card-header" id="bg-blue-benmac">
                         <div class="row">
                             <div class="col-md-6 mt-1">
-                                ➤ Engargolados Realizados
+                                ➤ Copias Realizadas
                                 <img src="https://cdn-icons-png.flaticon.com/512/711/711239.png" alt="BENMAC"
                                     class="icon-benmac">
                             </div>
@@ -26,7 +26,7 @@
                                         </span>
                                     </a>
                                 @endif
-                                <a href="{{ route('engargolados') }}" class="btn btn-primary btn-sm mx-1">
+                                <a href="{{ route('copiasRealizadas') }}" class="btn btn-primary btn-sm mx-1">
                                     Realizados
                                     <span class="badge text-bg-danger">
                                         {{ $realizados }}
@@ -36,8 +36,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if ($datos_engargolados->isEmpty())
-                            <h6 class="h6 text-center mt-2">No se han realizado engargolados.</h6>
+                        @if ($resultados->isEmpty())
+                            <h6 class="h6 text-center mt-2">No se han realizado copias.</h6>
                         @else
                             <table class="table table-responsive table-hover text-center">
                                 <thead>
@@ -53,7 +53,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider text-center">
-                                    @foreach ($datos_engargolados as $datos)
+                                    @foreach ($resultados as $datos)
                                         <tr>
                                             <th scope="row">{{ $datos->id }}</th>
                                             <td>{{ $datos->matricula }}</td>
@@ -78,7 +78,7 @@
                         @endif
                     </div>
                     <div class="mx-3">
-                        {{ $datos_engargolados->links('pagination::bootstrap-4') }}
+                        {{ $resultados->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

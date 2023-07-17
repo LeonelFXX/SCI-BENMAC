@@ -171,7 +171,7 @@
                                     <th scope="col">A. Materno</th>
                                     <th scope="col">Tipo De Usuario</th>
                                     <th scope="col">Saldo</th>
-                                    <th scope="col" width="350px">Acciones</th>
+                                    <th scope="col" width="275px">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="table-group-divider text-center">
@@ -202,27 +202,18 @@
                                             <td><span class="badge text-bg-success">$ {{ $user->saldo }}</span></td>
                                         @endif
                                         <td>
-                                            <form action="{{ route('users.destroy', $user->id) }}" method="POST">
-                                                <!-- Editar Usuario -->
-                                                <a class="btn btn-primary btn-sm mx-1"
-                                                    href="{{ route('users.edit', $user->id) }}">Editar
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/2355/2355330.png"
-                                                        alt="BENMAC" class="icon-benmac">
-                                                </a>
-                                                <!-- Cargar Saldo -->
-                                                <a class="btn btn-success btn-sm mx-1"
-                                                    href="{{ route('users.show', $user->id) }}">Cargar Saldo
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/126/126229.png"
-                                                        alt="BENMAC" class="icon-benmac">
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm mx-1">
-                                                    Eliminar
-                                                    <img src="https://cdn-icons-png.flaticon.com/512/608/608258.png"
-                                                        alt="BENMAC" class="icon-benmac">
-                                                </button>
-                                            </form>
+                                            <!-- Editar Usuario -->
+                                            <a class="btn btn-primary btn-sm mx-1"
+                                                href="{{ route('users.edit', $user->id) }}">Editar
+                                                <img src="https://cdn-icons-png.flaticon.com/512/2355/2355330.png"
+                                                    alt="BENMAC" class="icon-benmac">
+                                            </a>
+                                            <!-- Cargar Saldo -->
+                                            <a class="btn btn-success btn-sm mx-1"
+                                                href="{{ route('users.show', $user->id) }}">Cargar Saldo
+                                                <img src="https://cdn-icons-png.flaticon.com/512/126/126229.png"
+                                                    alt="BENMAC" class="icon-benmac">
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

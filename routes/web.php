@@ -1,14 +1,15 @@
 <?php
 
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BindingController;
 use App\Http\Controllers\PrinterController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ImpressionController;
 use App\Http\Controllers\QueryController;
 use App\Http\Controllers\ExternalDataController;
+use App\Http\Controllers\CopyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +35,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/users', UserController::class)->middleware('can:accederUsuarios');
 
 // CRUD: Impresoras
-Route::resource('/printers', PrinterController::class)->middleware('can:accederUsuarios');
+Route::resource('/printers', PrinterController::class)->middleware('can:accederAdministradorGeneral');
 
 // Vista: Matrícula
 Route::get('/matricula', [ExternalDataController::class, 'mostrarVistaMatricula'])->name('matricula');
@@ -122,6 +123,24 @@ Route::post('/rollback-solicitud/{solicitud_id}', [BindingController::class, 'ro
 
 // Función: Rollback De Impresión
 Route::post('/rollback-impresion/{impresion_id}', [ImpressionController::class, 'rollbackImpresion'])->name('rollbackImpresion');
+
+// Función: Rollback De Copia
+Route::post('/rollback-copia/{copia_id}', [CopyController::class, 'rollbackCopia'])->name('rollbackCopia');
+
+// Función: Solicitar Copias
+Route::post('/solicitar-copias', [CopyController::class, 'solicitarCopias'])->name('solicitarCopias');
+
+// Vista: Historial De Solicitudes De Copias Del Usuario
+Route::get('/panel-solicitudes-copias', [CopyController::class, 'mostrarPanelSolicitudesCopias'])->name('panelCopias');
+
+// Vista: Solicitudes De Engargolado
+Route::get('/solicitudes-copias', [CopyController::class, 'mostrarVistaSolicitudesCopias'])->name('solicitudesCopias')->middleware('can:accederEngargolados');
+
+// Vista: Engargolados Realizados
+Route::get('/copias-realizadas', [CopyController::class, 'mostrarVistaCopiasRealizadas'])->name('copiasRealizadas')->middleware('can:accederEngargolados');
+
+// Función: Dar Por Realizado El Copiado
+Route::put('/copiado-realizado/{id}', [CopyController::class, 'controlarSolicitudCopia'])->name('copiadoCompletado')->middleware('can:accederEngargolados');
 
 /* - - - Reportes PDF - - - */
 // Reporte General Por Mes

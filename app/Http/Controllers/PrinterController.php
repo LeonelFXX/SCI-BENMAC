@@ -32,7 +32,8 @@ class PrinterController extends Controller
     {
         $request->validate([
             'nombre' => ['required', 'string'],
-            'color' => ['required']
+            'color' => ['required'],
+            'ubicacion' => ['required']
         ]);
 
         $color = $request->input('color');
@@ -40,6 +41,7 @@ class PrinterController extends Controller
         $impresora = New Printer();
         $impresora->nombre = $request->nombre;
         $impresora->color = $color;
+        $impresora->ubicacion = $request->ubicacion;
         $impresora->save();
 
         return redirect()->route('printers.index')->with('success', 'Nueva Impresora Agregada Correctamente.');
@@ -58,11 +60,18 @@ class PrinterController extends Controller
     */
     public function update(Request $request, Printer $printer)
     {
+        $request->validate([
+            'nombre' => ['required', 'string'],
+            'color' => ['required'],
+            'ubicacion' => ['required']
+        ]);
+        
         $color = $request->input('color');
 
         $impresora = Printer::find($printer->id);
         $impresora->nombre = $request->nombre;
         $impresora->color = $color;
+        $impresora->ubicacion = $request->ubicacion;
         $impresora->save();
 
         return redirect()->route('printers.index')->with('success', 'Impresora Actualizada Correctamente.');

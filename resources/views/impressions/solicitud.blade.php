@@ -100,6 +100,16 @@
                             </div>
                         </div>
                         <div class="row">
+                            <!-- Ubicación -->
+                            <div class="col-md-12 mb-2">
+                                <div class="form-outline">
+                                    <label class="form-label">Ubicación De La Impresora</label>
+                                    <input type="text" class="form-control form-control-lg"
+                                        value="{{ $impresion->ubicacion }}" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12 mt-2 mb-2">
                                 <div class="form-outline">
                                     <label for="descripcion" class="mb-2">

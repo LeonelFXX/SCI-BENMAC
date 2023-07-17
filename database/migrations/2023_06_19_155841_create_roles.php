@@ -29,6 +29,7 @@ return new class extends Migration {
         // Asignar Rol A Usuario
         $a_g->assignRole($admin_general);
 
+        Permission::create(['name' => 'accederAdministradorGeneral']);
         Permission::create(['name' => 'accederEngargolados']);
         Permission::create(['name' => 'accederSolicitudesImpresiones']);
         Permission::create(['name' => 'accederImpresiones']);

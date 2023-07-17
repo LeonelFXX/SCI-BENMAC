@@ -40,7 +40,7 @@ class BindingController extends Controller
             ->join('users', 'users.id', '=', 'bindings.user_id')
             ->where('bindings.estado', 'Pendiente');
 
-        $datos_solicitudes = $query->get();
+        $datos_solicitudes = $query->paginate(4);
 
         return view('bindings.solicitudes', compact('solicitudes', 'realizados', 'datos_solicitudes'));
     }
@@ -75,7 +75,7 @@ class BindingController extends Controller
             ->join('users', 'users.id', '=', 'bindings.user_id')
             ->where('bindings.estado', 'Realizado');
 
-        $datos_engargolados = $query->paginate(10);
+        $datos_engargolados = $query->paginate(7);
 
         return view('bindings.engargolados', compact('solicitudes', 'realizados', 'datos_engargolados'));
     }
@@ -113,7 +113,7 @@ class BindingController extends Controller
 
                 DB::commit();
 
-                return redirect()->route('home')->with('success', 'Se ha solicitado un engargolado.');
+                return redirect()->back()->with('success', 'Tu solicitud ha sido enviada. Puedes ver los detalles en "Solicitudes De Engargolados" en tu perfil.');
             } catch (\Exception $e) {
                 DB::rollBack();
 

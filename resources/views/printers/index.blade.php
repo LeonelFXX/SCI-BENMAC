@@ -28,6 +28,8 @@
                         <div class="row">
                             <div class="col-md-6 mt-1">
                                 ➤ Todos Las Impresoras
+                                <img src="https://cdn-icons-png.flaticon.com/512/446/446991.png" alt="BENMAC"
+                                    class="icon-benmac">
                             </div>
                             <div class="col-md-6 d-flex flex-row-reverse">
                                 <!-- Agregar Impresora -->
@@ -46,6 +48,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Nombre</th>
                                     <th scope="col">Color</th>
+                                    <th scope="col">Ubicación</th>
                                     <th scope="col" width="300px">Acciones</th>
                                 </tr>
                             </thead>
@@ -55,6 +58,7 @@
                                         <th scope="row">{{ $impresora->id }}</th>
                                         <td>{{ $impresora->nombre }}</td>
                                         <td>{{ $impresora->color }}</td>
+                                        <td>{{ $impresora->ubicacion }}</td>
                                         <td>
                                             <form action="{{ route('printers.destroy', $impresora->id) }}" method="POST">
                                                 <!-- Editar Usuario -->
