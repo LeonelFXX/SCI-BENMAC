@@ -68,7 +68,7 @@ class UserController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        User::create([
+        $user = User::create([
             'matricula' => $request->matricula,
             'name' => $request->name,
             'apellido_paterno' => $request->apellido_paterno,
@@ -79,6 +79,9 @@ class UserController extends Controller
             'licenciatura' => 'Personal Administrativo',
             'tipo_usuario' => '5'
         ]);
+
+        $role = $request->input('role');
+        $user->syncRoles($role);
 
         return redirect()->route('users.index')->with('success', 'Nuevo Usuario Creado Correctamente.');
     }

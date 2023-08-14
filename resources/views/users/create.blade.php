@@ -20,7 +20,7 @@
                                         <input type="text" id="matricula"
                                             class="form-control form-control-lg @error('matricula') is-invalid @enderror"
                                             placeholder="Ej. 213200350000" name="matricula"
-                                            value="{{ $estudiante->matricula }}" />
+                                            value="{{ $personal_administrativo->clave_administrativa }}" />
                                         @error('matricula')
                                             <span class="invalid-feedback text-center" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
                                         <label class="form-label" for="name">Nombre(s)</label>
                                         <input type="text" id="name"
                                             class="form-control form-control-lg @error('name') is-invalid @enderror"
-                                            placeholder="Nombre(s)" name="name" value="{{ $estudiante->nombre }}" />
+                                            placeholder="Nombre(s)" name="name" value="{{ $personal_administrativo->nombre }}" />
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                                         <label class="form-label" for="apellidoPaterno">Apellido Paterno</label>
                                         <input type="text" id="apellidoPaterno" class="form-control form-control-lg"
                                             placeholder="A. Paterno" name="apellido_paterno"
-                                            value="{{ $estudiante->apellido_paterno }}" />
+                                            value="{{ $personal_administrativo->apellido_paterno }}" />
                                     </div>
                                 </div>
                                 <!-- Apellido Materno -->
@@ -57,7 +57,7 @@
                                         <label class="form-label" for="apellidoMaterno">Apellido Materno</label>
                                         <input type="text" id="apellidoMaterno" class="form-control form-control-lg"
                                             placeholder="A. Materno" name="apellido_materno"
-                                            value="{{ $estudiante->apellido_materno }}" />
+                                            value="{{ $personal_administrativo->apellido_materno }}" />
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                         <label class="form-label" for="phoneNumber">Télefono</label>
                                         <input type="tel" id="phoneNumber" class="form-control form-control-lg"
                                             placeholder="000-000-00-00" name="telefono"
-                                            value="{{ $estudiante->telefono }}" />
+                                            autofocus/>
                                     </div>
                                 </div>
                                 <!-- Correo Electrónico -->
@@ -79,12 +79,23 @@
                                         <input type="email" id="emailAddress"
                                             class="form-control form-control-lg @error('email') is-invalid @enderror"
                                             placeholder="ejemplo@benmac.edu.mx" name="email"
-                                            value="{{ $estudiante->email }}" />
+                                            value="{{ $personal_administrativo->correo_institucional }}" />
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-4">
+                                        <label for="role">Rol</label>
+                                        <select name="role" id="role" class="form-control">
+                                            <option selected disabled>Escoge Una Opción...</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>

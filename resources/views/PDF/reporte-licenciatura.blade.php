@@ -243,7 +243,7 @@
                     <th colspan="5">Detalles De Usuarios Con Impresiones No Pago</th>
                 </tr>
                 <tr>
-                    <th>Matrícula</th>
+                    <th>Clave</th>
                     <th>T. Hojas</th>
                     <th>Descripción</th>
                     <th>Encargado</th>

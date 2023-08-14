@@ -270,18 +270,10 @@ class ImpressionController extends Controller
         // Dinero General Gastado
         $general_gastado = DB::table('impressions')
             ->select(DB::raw('SUM(coste_impresion) AS suma_coste_impresion'))
-            ->whereIn('user_id', function ($query) {
-                $query->select('id')
-                    ->from('users');
-            })
             ->get();
 
         // Total De Impresiones Realizadas
         $total_impresiones = DB::table('impressions')
-            ->whereIn('user_id', function ($query) {
-                $query->select('id')
-                    ->from('users');
-            })
             ->count();
 
         // Impresora Más Utilizada
@@ -291,7 +283,6 @@ class ImpressionController extends Controller
             ->groupBy('users.licenciatura', 'impressions.impresora')
             ->havingRaw('COUNT(*) = (SELECT MAX(total_utilizaciones) FROM (SELECT users.licenciatura, impressions.impresora, COUNT(*) AS total_utilizaciones FROM users JOIN impressions ON users.id = impressions.user_id GROUP BY users.licenciatura, impressions.impresora) AS subquery WHERE subquery.licenciatura = users.licenciatura)')
             ->orderBy('users.licenciatura');
-
         $impresoras = $total_utilizaciones->get();
 
         // Total De Impresiones A Color
@@ -370,8 +361,6 @@ class ImpressionController extends Controller
             'numero_copias' => ['required', 'numeric', 'min:0'],
             'tamaño' => ['required', 'string'],
             'impresora' => ['required', 'string'],
-            'sin_engargolado' => ['required_without:con_engargolado'],
-            'con_engargolado' => ['required_without:sin_engargolado'],
             'descripcion' => ['required', 'string']
         ]);
 
@@ -387,21 +376,11 @@ class ImpressionController extends Controller
         $numero_hojas = $request->numero_hojas; // Número De Hojas
         $numero_copias = $request->numero_copias; // Número De Copias
         $tamaño = $request->tamaño; // Tamaño
-        $sin_eng = $request->input('sin_engargolado'); // Sin Engargolado
-        $con_eng = $request->input('con_engargolado'); // Con Engargolado
         $descripcion = $request->descripcion;
 
         // Contabilidad
         $total_hojas = $numero_hojas * $numero_copias; // Total De Hojas Impresas
         $coste_impresion = null; // Total Coste De Impresión
-
-        // Validación De Engargolados
-        if ($sin_eng == "1") {
-            $estado = 'Sin Engargolado';
-        } else if ($con_eng == "2") {
-            $estado = 'Con Engargolado';
-            $coste_impresion += $price->engargolado;
-        }
 
         DB::beginTransaction();
 
@@ -416,27 +395,13 @@ class ImpressionController extends Controller
             $registro->impresora = $printer->nombre;
             $registro->ubicacion = $printer->ubicacion;
             $registro->total_hojas = $total_hojas;
-            $registro->engargolado = $estado;
+            $registro->engargolado = "Sin Engargolado";
             $registro->pago = 'No';
             $registro->descripcion = $descripcion;
             $registro->estado = "Pendiente";
             $registro->coste_impresion = 0.00;
             $registro->encargado = null;
             $registro->save();
-
-            // ID De La Impresión Creada
-            $impresion_id = $registro->id;
-
-            if ($registro->engargolado === 'Con Engargolado') {
-                // Guarda La Solicitud De Engargolado Asociada A La Impresión
-                $engargolado = new Binding();
-                $engargolado->impresion_id = $impresion_id;
-                $engargolado->user_id = $id;
-                $engargolado->coste_engargolado = 0.00;
-                $engargolado->estado = 'Pendiente';
-                $engargolado->encargado = null;
-                $engargolado->save();
-            }
 
             // Commit
             DB::commit();
@@ -620,12 +585,6 @@ class ImpressionController extends Controller
             $solicitud = Impression::find($id);
 
             $solicitud->delete();
-
-            if ($solicitud->engargolado == 'Con Engargolado') {
-                $impresion_id = $solicitud->impresion_id;
-
-                DB::table('bindings')->where('impresion_id', $impresion_id)->delete();
-            }
 
             DB::commit();
         } catch (\Exception $e) {

@@ -423,26 +423,6 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="row mt-2">
-                                                            <!-- Engargolado -->
-                                                            <div class="col-md-12 mb-2 d-flex justify-content-evenly">
-                                                                <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        value="1" id="checkbox3" name="sin_engargolado"
-                                                                        checked>
-                                                                    <label class="form-check-label" for="checkbox3">
-                                                                        Sin Engargolado
-                                                                    </label>
-                                                                </div>
-                                                                <div class="form-check form-check-inline">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        value="2" id="checkbox4" name="con_engargolado">
-                                                                    <label class="form-check-label" for="checkbox4">
-                                                                        Con Engargolado
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
                                                         <div class="row mt-2 mb-2">
                                                             <div class="form-group">
                                                                 <label for="descripcion" class="mb-2">

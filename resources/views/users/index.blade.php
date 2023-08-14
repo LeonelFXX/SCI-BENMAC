@@ -165,7 +165,7 @@
                         <table class="table table-responsive table-hover text-center align-items-center">
                             <thead>
                                 <tr class="text-center">
-                                    <th scope="col">Matrícula</th>
+                                    <th scope="col">Matrícula | Clave</th>
                                     <th scope="col">Nombre(s)</th>
                                     <th scope="col">A. Paterno</th>
                                     <th scope="col">A. Materno</th>

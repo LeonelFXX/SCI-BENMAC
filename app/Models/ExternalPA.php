@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class ExternalPA extends Model
 {
     use HasFactory;
 
     protected $connection = 'mysql_external';
 
-    protected $table = 'estudiantes';
+    protected $table = 'personal_docente';
 }

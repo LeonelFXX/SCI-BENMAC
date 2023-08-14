@@ -214,7 +214,6 @@
     </div>
     @yield('scripts')
     <script src="{{ asset('assets/js/check.js') }}"></script>
-    <script src="{{ asset('assets/js/check-2.js') }}"></script>
     <script src="{{ asset('assets/js/impresion.js') }}"></script>
 </body>
 

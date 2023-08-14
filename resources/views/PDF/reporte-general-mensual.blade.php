@@ -13,7 +13,7 @@
                   color: #fff;
                   height: 70px;">
             <tr>
-                <th colspan="2">Detalles Individuales Sobre Recargas</th>
+                <th colspan="2">Detalles Generales Sobre Recargas</th>
             </tr>
             <tr>
                 <th>Número De Recargas</th>

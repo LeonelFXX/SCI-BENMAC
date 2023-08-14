@@ -33,14 +33,14 @@ return new class extends Migration
 
         // Administrador General
         DB::table('users')->insert([
-            'matricula' => '482100078',
-            'name' => 'Edgar Leonel',
-            'apellido_paterno' => 'Acevedo',
-            'apellido_materno' => 'Cuevas',
+            'matricula' => 'AdminGBenmac',
+            'name' => 'Administrador',
+            'apellido_paterno' => 'General',
+            'apellido_materno' => 'BENMAC',
             'licenciatura' => 'Personal Administrativo',
-            'telefono' => '4924920523',
-            'email' => 'leonelxo2020@gmail.com',
-            'password' => Hash::make('Juni1200'),
+            'telefono' => '0000000000',
+            'email' => 'impresiones@benmac.edu.mx',
+            'password' => Hash::make('BENMAC_%2023<'),
             'tipo_usuario' => '1'
         ]);
     }

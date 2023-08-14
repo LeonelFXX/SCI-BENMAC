@@ -68,7 +68,7 @@
                                         <label class="form-label" for="phoneNumber">Télefono</label>
                                         <input type="tel" id="phoneNumber" class="form-control form-control-lg"
                                             placeholder="000-000-00-00" name="telefono" value="{{ $estudiante->telefono }}"
-                                            readonly />
+                                            />
                                     </div>
                                 </div>
                                 <!-- Correo Electrónico -->
@@ -79,7 +79,7 @@
                                         <input type="email" id="emailAddress"
                                             class="form-control form-control-lg @error('email') is-invalid @enderror"
                                             placeholder="ejemplo@benmac.edu.mx" name="email"
-                                            value="{{ $estudiante->email }}" readonly />
+                                            value="{{ $estudiante->email }}" />
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
