@@ -20,7 +20,7 @@
                                         <input type="text" id="matricula"
                                             class="form-control form-control-lg @error('matricula') is-invalid @enderror"
                                             placeholder="Ej. 213200350000" name="matricula"
-                                            value="{{ $personal_administrativo->clave_administrativa }}" />
+                                            value="{{ $personal_administrativo->clave_administrativa }}" readonly/>
                                         @error('matricula')
                                             <span class="invalid-feedback text-center" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -34,7 +34,7 @@
                                         <label class="form-label" for="name">Nombre(s)</label>
                                         <input type="text" id="name"
                                             class="form-control form-control-lg @error('name') is-invalid @enderror"
-                                            placeholder="Nombre(s)" name="name" value="{{ $personal_administrativo->nombre }}" />
+                                            placeholder="Nombre(s)" name="name" value="{{ $personal_administrativo->nombre }}" readonly/>
                                         @error('name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                                         <label class="form-label" for="apellidoPaterno">Apellido Paterno</label>
                                         <input type="text" id="apellidoPaterno" class="form-control form-control-lg"
                                             placeholder="A. Paterno" name="apellido_paterno"
-                                            value="{{ $personal_administrativo->apellido_paterno }}" />
+                                            value="{{ $personal_administrativo->apellido_paterno }}" readonly/>
                                     </div>
                                 </div>
                                 <!-- Apellido Materno -->
@@ -57,7 +57,7 @@
                                         <label class="form-label" for="apellidoMaterno">Apellido Materno</label>
                                         <input type="text" id="apellidoMaterno" class="form-control form-control-lg"
                                             placeholder="A. Materno" name="apellido_materno"
-                                            value="{{ $personal_administrativo->apellido_materno }}" />
+                                            value="{{ $personal_administrativo->apellido_materno }}" readonly/>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                         <input type="email" id="emailAddress"
                                             class="form-control form-control-lg @error('email') is-invalid @enderror"
                                             placeholder="ejemplo@benmac.edu.mx" name="email"
-                                            value="{{ $personal_administrativo->correo_institucional }}" />
+                                            value="{{ $personal_administrativo->correo_institucional }}" readonly/>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
